@@ -1,11 +1,16 @@
+import styled from 'styled-components'
 import { RepositoryCard } from './RepositoryCard'
 
-export const RepositoriesList = ({ list = [] }) => {
+const List = styled.div`
+  width: 100%;
+`
+
+export const RepositoriesList = ({ list = ['sd'] }) => {
   return (
-    <div>
-      {list.map((repo) => (
-        <RepositoryCard {...repo} />
+    <List>
+      {list.map((repo, index) => (
+        <RepositoryCard key={index} {...repo} />
       ))}
-    </div>
+    </List>
   )
 }
