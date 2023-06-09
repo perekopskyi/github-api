@@ -4,13 +4,13 @@ import { RepositoriesList } from './components/RepositoriesList'
 
 const Layout = styled.div`
   width: 100vw;
-  height: 100vh;
   background: #f8f8f8;
   display: flex;
   flex-direction: column;
 `
 const Container = styled.div`
-  width: 1200px;
+  width: 80%;
+  max-width: 1200px;
   margin: 0 auto;
 `
 

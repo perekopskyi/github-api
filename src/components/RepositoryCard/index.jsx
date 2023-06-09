@@ -6,6 +6,7 @@ const Card = styled.div`
   border-radius: 16px;
   display: flex;
   padding: 40px;
+  margin-top: 36px;
 `
 
 const Content = styled.div`
@@ -14,14 +15,13 @@ const Content = styled.div`
   justify-content: space-between;
   flex: 1;
 `
-const Achievements = styled.div``
 const Achievement = styled.div`
   display: flex;
   align-items: center;
 `
 
 const MainContent = styled.div`
-  margin-left: 32px;
+  margin: 0 32px;
 `
 
 const Text = styled.p`
@@ -38,6 +38,8 @@ const InfoText = styled(Text)`
 
 const AdditionalText = styled(Text)`
   color: #6e798c;
+  overflow: hidden;
+  max-height: 100px;
 `
 
 const AchievementIcon = styled.svg`
@@ -49,16 +51,23 @@ const AchievementText = styled(Text)`
   margin-left: 16px;
 `
 
-export const RepositoryCard = () => (
+export const RepositoryCard = ({
+  description,
+  full_name,
+  language,
+  name,
+  stargazers_count,
+  watchers_count,
+}) => (
   <Card>
     <img src={image} alt="" />
 
     <Content>
       <MainContent>
-        <h3>Repo name</h3>
-        <InfoText>Author</InfoText>
-        <InfoText>Language</InfoText>
-        <AdditionalText>Description</AdditionalText>
+        <h3>{name}</h3>
+        <InfoText>{full_name}</InfoText>
+        <InfoText>{language}</InfoText>
+        <AdditionalText>{description}</AdditionalText>
       </MainContent>
       <div>
         <Achievement>
@@ -75,7 +84,7 @@ export const RepositoryCard = () => (
             />
           </AchievementIcon>
           <AchievementText>
-            <b>146</b> stars
+            <b>{stargazers_count}</b> stars
           </AchievementText>
         </Achievement>
         <Achievement>
@@ -96,7 +105,7 @@ export const RepositoryCard = () => (
             />
           </AchievementIcon>
           <AchievementText>
-            <b>146</b> watchers
+            <b>{watchers_count}</b> watchers
           </AchievementText>
         </Achievement>
       </div>
