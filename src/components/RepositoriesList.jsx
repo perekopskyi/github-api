@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { RepositoryCard } from './RepositoryCard'
 import { Pagination } from './Pagination'
+import { fetchRepositories } from '../store/repositoriesSlice'
 
 const List = styled.div`
   max-width: 100%;
