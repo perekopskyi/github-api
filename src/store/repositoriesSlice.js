@@ -39,19 +39,11 @@ const normalizeRepositories = (items) =>
 export const repositoriesSlice = createSlice({
   name: 'repositories',
   initialState: {
-    searchQuery: {
-      name: 'react',
-      page: 1,
-    },
     items: [],
     incomplete: false,
     total: 0,
   },
-  reducers: {
-    setSearchQuery: (state, action) => {
-      state.searchQuery = { ...state.searchQuery, ...action.payload }
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchRepositories.fulfilled, (state, action) => {
       state.items = normalizeRepositories(action.payload.items)

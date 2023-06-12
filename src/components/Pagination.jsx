@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { setSearchQuery } from '../store/repositoriesSlice'
+import { GET_STATE } from '../store'
 import { fetchRepositories } from '../store/repositoriesSlice'
 
 const Container = styled.div`
@@ -28,13 +28,12 @@ const Button = styled.button`
   }
 `
 
-export const Pagination = () => {
+export const Pagination = ({
+  searchQuery: { name, page: currentPage },
+  setSearchQuery,
+}) => {
   const dispatch = useDispatch()
-  const {
-    total,
-    items,
-    searchQuery: { name, page: currentPage },
-  } = useSelector((state) => state.repositories)
+  const { total, items } = useSelector(GET_STATE.REPOSITORIES)
   const itemsPerPage = items.length
 
   const totalPages = Math.ceil(total / itemsPerPage)
@@ -42,16 +41,16 @@ export const Pagination = () => {
   const isLastPage = currentPage === totalPages
 
   const handlePageChange = (pageNumber) => {
-    dispatch(setSearchQuery({ page: pageNumber }))
+    setSearchQuery({ page: pageNumber })
     dispatch(fetchRepositories({ name, page: pageNumber }))
   }
 
   const handlePrev = () => {
-    dispatch(setSearchQuery({ page: currentPage - 1 }))
+    setSearchQuery({ page: currentPage - 1 })
     dispatch(fetchRepositories({ name, page: currentPage - 1 }))
   }
   const handleNext = () => {
-    dispatch(setSearchQuery({ page: currentPage + 1 }))
+    setSearchQuery({ page: currentPage + 1 })
     dispatch(fetchRepositories({ name, page: currentPage + 1 }))
   }
 

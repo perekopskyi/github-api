@@ -6,3 +6,7 @@ export const store = configureStore({
     repositories: repositoriesSlice.reducer,
   },
 })
+
+export const GET_STATE = {
+  REPOSITORIES: (state) => state.repositories,
+}

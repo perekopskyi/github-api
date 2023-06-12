@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import styled from 'styled-components'
 import { Input } from './components/Input'
 import { RepositoriesList } from './components/RepositoriesList'
@@ -15,11 +16,26 @@ const Container = styled.div`
 `
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState({
+    name: 'react',
+    page: 1,
+  })
+
+  let debounceTimeoutId
+
+  const onSearch = (name) => {
+    clearTimeout(debounceTimeoutId)
+
+    debounceTimeoutId = setTimeout(() => {
+      setSearchQuery({ name, page: 1 })
+    }, 1000)
+  }
+
   return (
     <Layout>
       <Container>
-        <Input />
-        <RepositoriesList />
+        <Input {...{ onSearch }} />
+        <RepositoriesList {...{ searchQuery, setSearchQuery }} />
       </Container>
     </Layout>
   )

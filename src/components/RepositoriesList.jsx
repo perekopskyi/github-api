@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { RepositoryCard } from './RepositoryCard'
 import { Pagination } from './Pagination'
+import { GET_STATE } from '../store'
 import { fetchRepositories } from '../store/repositoriesSlice'
 
 const List = styled.div`
@@ -11,16 +12,14 @@ const List = styled.div`
   overflow-y: scroll;
 `
 
-export const RepositoriesList = () => {
+export const RepositoriesList = ({ searchQuery, setSearchQuery }) => {
   const dispatch = useDispatch()
-  const {
-    items,
-    searchQuery: { name },
-  } = useSelector((state) => state.repositories)
+  const { items } = useSelector(GET_STATE.REPOSITORIES)
+  const { name } = searchQuery
 
   useEffect(() => {
     dispatch(fetchRepositories({ name }))
-  }, [])
+  }, [dispatch, name])
 
   return (
     <>
@@ -33,7 +32,7 @@ export const RepositoriesList = () => {
               <RepositoryCard key={repo.id} {...repo} />
             ))}
           </List>
-          <Pagination />
+          <Pagination {...{ searchQuery, setSearchQuery }} />
         </>
       )}
     </>

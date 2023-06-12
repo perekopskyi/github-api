@@ -1,6 +1,4 @@
-import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { fetchRepositories, setSearchQuery } from '../store/repositoriesSlice'
 
 const Container = styled.div`
   padding-top: 32px;
@@ -20,26 +18,12 @@ const StyledInput = styled.input`
   margin: 0 auto;
 `
 
-export const Input = () => {
-  const dispatch = useDispatch()
-  let debounceTimeoutId
-
-  const onSearch = (name) => {
-    clearTimeout(debounceTimeoutId)
-
-    debounceTimeoutId = setTimeout(() => {
-      dispatch(setSearchQuery({ name, page: 1 }))
-      dispatch(fetchRepositories({ name }))
-    }, 1000)
-  }
-
-  return (
-    <Container>
-      <StyledInput
-        type="text"
-        placeholder="Search"
-        onChange={(e) => onSearch(e.target.value)}
-      />
-    </Container>
-  )
-}
+export const Input = ({ onSearch }) => (
+  <Container>
+    <StyledInput
+      type="text"
+      placeholder="Search"
+      onChange={(e) => onSearch(e.target.value)}
+    />
+  </Container>
+)
